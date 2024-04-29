@@ -21,10 +21,7 @@ Favourite Image Selector is a simple mini mobile application built using Expo fo
 ## Features
 
 - Open Gallary from phone to add image from the button
-
-## Upcoming Feature
-
-- Delete the images from the list
+- Long Press to delete the images from the list
 
 ## Contributing
 

@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import appStyle from "./App.style";
@@ -12,6 +13,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { launchImageLibraryAsync } from "expo-image-picker";
 import { useEffect, useState } from "react";
 import backgroundImg from "./assets/background.jpg";
+import uuid from "react-native-uuid";
 export default function App() {
   useEffect(() => {
     loadImages();
@@ -22,7 +24,8 @@ export default function App() {
     if (image.canceled) {
       alert("No Image selected");
     } else {
-      setImageURIList([...imageURIList, image.assets[0].uri]);
+      const newImage = { id: uuid.v4(), uriVal: image.assets[0].uri };
+      setImageURIList([...imageURIList, newImage]);
     }
   };
   useEffect(() => {
@@ -44,6 +47,21 @@ export default function App() {
       console.log(e);
     }
   };
+  const deleteImage = (data) => {
+    Alert.alert("Delete Image", "Are you sure?", [
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          const newImageList = imageURIList.filter(
+            (imageVal) => imageVal.id !== data.id
+          );
+          setImageURIList(newImageList);
+        },
+      },
+      { text: "Cancel", style: "cancel" },
+    ]);
+  };
   return (
     <ImageBackground source={backgroundImg} style={{ flex: 1 }}>
       <SafeAreaProvider>
@@ -51,11 +69,18 @@ export default function App() {
           <Text style={appStyle.title}>Favourite Photos</Text>
           <View style={appStyle.body}>
             <ScrollView>
-              {imageURIList.map((data, i) => (
-                <TouchableOpacity key={data + i}>
-                  <Image style={appStyle.image} source={{ uri: data }} />
-                </TouchableOpacity>
-              ))}
+              {imageURIList &&
+                imageURIList.map((data) => (
+                  <TouchableOpacity
+                    onLongPress={() => deleteImage(data)}
+                    key={data.id}
+                  >
+                    <Image
+                      style={appStyle.image}
+                      source={{ uri: data.uriVal }}
+                    />
+                  </TouchableOpacity>
+                ))}
             </ScrollView>
           </View>
           <View style={appStyle.footer}>
