@@ -1,4 +1,9 @@
 # Favourite Image Selector
+# Preview
+![Screenshot_20240518-224047](https://github.com/harishakaharu/ImageSelectorNative_miniApp/assets/92537253/d54b1f1e-d63c-4b66-8e7e-49b8f7f9dca7)
+![Screenshot_20240518-224053](https://github.com/harishakaharu/ImageSelectorNative_miniApp/assets/92537253/f15c8da2-d0f3-4995-8fb2-1e5619314954)
+![Screenshot_20240518-224059](https://github.com/harishakaharu/ImageSelectorNative_miniApp/assets/92537253/8cb0c55b-7293-4321-8895-cdaa8da81933)
+
 
 Favourite Image Selector is a simple mini mobile application built using Expo for native development. It allows users to add favourite images from phone gallary. Data will be persisted
 
